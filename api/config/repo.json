@@ -119,7 +119,9 @@
       "target",
       "packages/*/dist", 
       "packages/*/build", 
-      ".output"
+      ".output",
+      ".trt",
+      ".onnx"
     ]
   },
   "repository": {

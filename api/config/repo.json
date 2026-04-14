@@ -120,8 +120,10 @@
       "packages/*/dist", 
       "packages/*/build", 
       ".output",
-      ".trt",
-      ".onnx"
+      "config/face_database.json",
+      "*.pkl",
+      "*.trt",
+      "*.onnx"
     ]
   },
   "repository": {

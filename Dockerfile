@@ -29,13 +29,15 @@ WORKDIR /api
 COPY api/pyproject.toml .
 COPY api/poetry.lock .
 # set python index
-ENV PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/
-RUN python -m pip install poetry==2.0.1 --no-cache-dir && \
-    poetry config virtualenvs.create true --local && \
-    poetry config virtualenvs.in-project true --local && \
-    poetry config virtualenvs.options.always-copy --local true && \
-    POETRY_MAX_WORKERS=10 poetry install --no-interaction --no-ansi --only main && \
-    poetry cache clear --all .
+ENV PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/ \  
+    PIP_TRUSTED_HOST=mirrors.aliyun.com
+    
+RUN python -m pip install --no-cache-dir poetry==2.0.1
+RUN poetry config repositories.aliyun https://mirrors.aliyun.com/pypi/simple/ && \
+    poetry config installer.max-workers 4 && \
+    poetry config virtualenvs.create false
+RUN poetry install --no-interaction --no-ansi --only main
+RUN poetry cache clear --all pypi
 
 # Use Python 3.11 as final image
 FROM python:3.11-slim

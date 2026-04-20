@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1-labs
+# syntax=docker.1ms.run/docker/dockerfile:1-labs
 
 # Build argument for custom certificates directory
 ARG CUSTOM_CERT_DIR="certs"

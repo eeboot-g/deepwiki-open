@@ -8,6 +8,8 @@ FROM node:20-alpine3.22 AS node_base
 FROM node_base AS node_deps
 WORKDIR /app
 COPY package.json package-lock.json ./
+# set npm registry
+RUN npm config set registry https://registry.npmmirror.com
 RUN npm ci --legacy-peer-deps
 
 FROM node_base AS node_builder
@@ -26,6 +28,8 @@ FROM python:3.11-slim AS py_deps
 WORKDIR /api
 COPY api/pyproject.toml .
 COPY api/poetry.lock .
+# set python index
+ENV PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/
 RUN python -m pip install poetry==2.0.1 --no-cache-dir && \
     poetry config virtualenvs.create true --local && \
     poetry config virtualenvs.in-project true --local && \

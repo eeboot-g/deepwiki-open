@@ -35,9 +35,11 @@ ENV PIP_TRUSTED_HOST=mirrors.aliyun.com
 RUN python -m pip install --no-cache-dir poetry==2.0.1
 RUN poetry config repositories.aliyun https://mirrors.aliyun.com/pypi/simple/ && \
     poetry config installer.max-workers 4 && \
-    poetry config virtualenvs.create false
+    poetry config virtualenvs.create true --local && \
+    poetry config virtualenvs.in-project true --local && \
+    poetry config virtualenvs.options.always-copy --local true
 RUN poetry install --no-interaction --no-ansi --only main
-RUN poetry cache clear --all pypi
+RUN poetry cache clear --all .
 
 # Use Python 3.11 as final image
 FROM python:3.11-slim

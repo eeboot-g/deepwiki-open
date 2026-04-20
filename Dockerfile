@@ -29,8 +29,8 @@ WORKDIR /api
 COPY api/pyproject.toml .
 COPY api/poetry.lock .
 # set python index
-ENV PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/ \  
-    PIP_TRUSTED_HOST=mirrors.aliyun.com
+ENV PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/  
+ENV PIP_TRUSTED_HOST=mirrors.aliyun.com
     
 RUN python -m pip install --no-cache-dir poetry==2.0.1
 RUN poetry config repositories.aliyun https://mirrors.aliyun.com/pypi/simple/ && \

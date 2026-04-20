@@ -21,7 +21,7 @@
           "temperature": 0.7,
           "top_p": 0.8
         },
-        "deepseek-v3.2": {  
+        "deepseek-v3.2": {
           "temperature": 0.7,
           "top_p": 0.8
         }
